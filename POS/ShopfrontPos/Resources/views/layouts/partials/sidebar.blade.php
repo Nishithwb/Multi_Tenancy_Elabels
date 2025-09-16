@@ -5,6 +5,7 @@
       <span class="brand-text fw-light">Elabels</span>
     </a>
   </div>
+  
   <div class="sidebar-wrapper">
     <nav class="mt-2">
             @php
