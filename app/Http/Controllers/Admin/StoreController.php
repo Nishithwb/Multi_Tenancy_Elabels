@@ -11,6 +11,7 @@ use App\Services\CreateStoreAndTenantService;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
+
 class StoreController extends Controller
 {
     public function index()
@@ -63,6 +64,7 @@ return redirect()->route('stores.edit', $store);
         return view('layouts.admin.stores.edit', compact('store'));
     }
 
+    
     public function update(Request $request, Store $store)
     {
         $this->authorizeStore($store);
@@ -73,21 +75,43 @@ return redirect()->route('stores.edit', $store);
         ]);
         
         $data['slug'] = Str::slug($data['name']);
-        //dd($data);
+
+        // Update central "stores" table
         $store->update($data);
 
-        return back()->with('status','Store updated');
+        // Update tenant details inside tenant DB
+        $tenant = Tenant::find($store->tenant_id);
+        if ($tenant) {
+            $tenant->run(function () use ($data, $store) {
+                $tenantDetail = \App\Models\Tenant\TenantDetail::where('tenant_id', $store->tenant_id)->first();
+                if ($tenantDetail) {
+                    $tenantDetail->update([
+                        'name' => $data['name'],
+                        'slug' => $data['slug'],
+                    ]);
+                }
+            });
+        }
+
+        return back()->with('status', 'Store and tenant details updated');
     }
 
     public function destroy(Store $store)
     {
         $this->authorizeStore($store);
 
-        // Optional: drop tenant DB too (product decision)
+        // Delete the tenant using Stancl Tenancy
+        $tenant = Tenant::find($store->tenant_id);
+        if ($tenant) {
+            $tenant->delete(); // This deletes the tenant from central DB
+            // See below for automatic DB deletion
+        }
+
         $store->delete();
 
-        return back()->with('status','Store deleted');
+        return back()->with('status', 'Store and associated tenant deleted');
     }
+
 
     public function getData()
     {

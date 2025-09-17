@@ -3,8 +3,9 @@
 @section('content')
 <div class="container">
     <h2>Stores</h2>
+    @if(Auth::user() && Auth::user()->hasRole('storeadmin'))
     <a href="{{ route('stores.create') }}" class="btn btn-primary mb-3">+ Add Store</a>
-    
+    @endif
     <table class="table table-bordered" id="stores-table">
         <thead>
             <tr>

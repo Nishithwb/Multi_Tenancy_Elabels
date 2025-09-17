@@ -47,6 +47,8 @@ return [
         // Stancl\Tenancy\Bootstrappers\RedisTenancyBootstrapper::class, // Note: phpredis is needed
     ],
 
+    'delete_database_after_tenant_deletion' => true,
+
     /**
      * Database tenancy config. Used by DatabaseTenancyBootstrapper.
      */
