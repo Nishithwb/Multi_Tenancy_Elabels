@@ -18,6 +18,7 @@
         </svg>
         </div>
     </div>
+   
     </div>
     <div class="shadow-bottom"></div>
     <ul class="list-unstyled menu-categories" id="accordionExample">
@@ -37,38 +38,41 @@
             </svg>
         </div>
         </a>
-    </li>
+ 
+        <ul class="collapse submenu list-unstyled show" id="dashboard" data-bs-parent="#accordionExample">
+            
+            <li class="menu">
+                <a href="{{ route('stores.index') }}" aria-expanded="false" class="dropdown-toggle">
+                <div>
+                    <svg class="nav-icon bi bi-speedometer" width="24" height="24" fill="currentColor"><use xlink:href="#speedometer"></use></svg>
+                    <span>Stores</span>
+                </div>
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </div>
+                </a>
+            </li>
 
-    <li class="menu">
-        <a href="{{ route('stores.index') }}" aria-expanded="false" class="dropdown-toggle">
-        <div>
-            <svg class="nav-icon bi bi-speedometer" width="24" height="24" fill="currentColor"><use xlink:href="#speedometer"></use></svg>
-            <span>Stores</span>
-        </div>
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-            <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-        </div>
-        </a>
+            @if(Auth::user() && Auth::user()->hasRole('superadmin'))
+            <li class="menu">
+                <a href="{{ route('admin.store-users.index') }}" aria-expanded="false" class="dropdown-toggle">
+                <div>
+                    <svg class="nav-icon bi bi-speedometer" width="24" height="24" fill="currentColor"><use xlink:href="#speedometer"></use></svg>
+                    <span>Store Admins</span>
+                </div>
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </div>
+                </a>
+            </li>
+            @endif
+    
+        </ul>
     </li>
-
-    @if(Auth::user() && Auth::user()->hasRole('superadmin'))
-    <li class="menu">
-        <a href="{{ route('admin.store-users.index') }}" aria-expanded="false" class="dropdown-toggle">
-        <div>
-            <svg class="nav-icon bi bi-speedometer" width="24" height="24" fill="currentColor"><use xlink:href="#speedometer"></use></svg>
-            <span>Store Admins</span>
-        </div>
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-            <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-        </div>
-        </a>
-    </li>
-    @endif
-
     <!-- Add more sidebar items here as needed, matching your menu requirements and Laravel routes -->
 
     </ul>

@@ -321,6 +321,21 @@
                 </div>
             </li>
         </ul>
+        &nbsp;
+        &nbsp;
+        <div class="d-flex">
+            @php
+                $tenantId = request()->route('tenant')
+                ?? request()->segment(1)
+                ?? request()->input('tenant')
+                ?? null;
+            @endphp
+                <form method="POST" action="{{ route('swiftpos.logout', ['tenant' => $tenantId]) }}">
+                @csrf
+                  <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+                </form>
+          
+        </div>
     </header>
 </div>
 
