@@ -1,40 +1,77 @@
-<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
-  <div class="sidebar-brand">
-    <a href="{{ url('/admin') }}" class="brand-link">
-      <img src="{{ url('vendor/adminlte/assets/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
-      <span class="brand-text fw-light">Elabels</span>
-    </a>
-  </div>
-  <div class="sidebar-wrapper">
-    <nav class="mt-2">
-      <!-- copy nav markup from index.html or build your menu -->
-      <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" id="navigation">
-        <li class="nav-item menu-open">
-          <a href="{{ route('admin.dashboard') }}" class="nav-link active">
-            <i class="nav-icon bi bi-speedometer"></i>
-            <p>Dashboard <i class="nav-arrow bi bi-chevron-right"></i></p>
-          </a>
-        </li>
-      
-      
-        <li class="nav-item menu-open">
-          <a href="{{ route('stores.index') }}" class="nav-link active">
-            <i class="nav-icon bi bi-speedometer"></i>
-            <p>Stores</p>
-          </a>
-        </li>
+<div class="sidebar-wrapper sidebar-theme">
 
-      @if(Auth::user() && Auth::user()->hasRole('superadmin'))
-        <li class="nav-item menu-open">
-          <a href="{{ route('admin.store-users.index') }}" class="nav-link active">
-            <i class="nav-icon bi bi-speedometer"></i>
-            <p>Store Admins</p>
-          </a>
-        </li>
-      @endif
+<nav id="sidebar">
+    <div class="navbar-nav theme-brand flex-row text-center">
+    <div class="nav-logo">
+        <div class="nav-item theme-logo">
+        <a href="{{ url('/admin') }}" class="brand-link">
+            <img src="{{ url('vendor/adminlte/assets/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
+            <span class="brand-text fw-light">Elabels</span>
+        </a>
+        </div>
+    </div>
+    <div class="nav-item sidebar-toggle">
+        <div class="btn-toggle sidebarCollapse">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-left">
+            <polyline points="11 17 6 12 11 7"></polyline>
+            <polyline points="18 17 13 12 18 7"></polyline>
+        </svg>
+        </div>
+    </div>
+    </div>
+    <div class="shadow-bottom"></div>
+    <ul class="list-unstyled menu-categories" id="accordionExample">
 
-        <!-- more items -->
-      </ul>
-    </nav>
-  </div>
-</aside>
+    <li class="menu">
+        <a href="{{ route('admin.dashboard') }}" aria-expanded="true" class="dropdown-toggle">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Dashboard</span>
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+            <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </div>
+        </a>
+    </li>
+
+    <li class="menu">
+        <a href="{{ route('stores.index') }}" aria-expanded="false" class="dropdown-toggle">
+        <div>
+            <svg class="nav-icon bi bi-speedometer" width="24" height="24" fill="currentColor"><use xlink:href="#speedometer"></use></svg>
+            <span>Stores</span>
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+            <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </div>
+        </a>
+    </li>
+
+    @if(Auth::user() && Auth::user()->hasRole('superadmin'))
+    <li class="menu">
+        <a href="{{ route('admin.store-users.index') }}" aria-expanded="false" class="dropdown-toggle">
+        <div>
+            <svg class="nav-icon bi bi-speedometer" width="24" height="24" fill="currentColor"><use xlink:href="#speedometer"></use></svg>
+            <span>Store Admins</span>
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+            <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </div>
+        </a>
+    </li>
+    @endif
+
+    <!-- Add more sidebar items here as needed, matching your menu requirements and Laravel routes -->
+
+    </ul>
+</nav>
+
+</div>
